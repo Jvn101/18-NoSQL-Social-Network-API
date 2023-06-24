@@ -1,29 +1,14 @@
 const { Thought, User } = require("../models");
-//const { ObjectId } = require('mongoose').Types;
 
 const thoughtController = {
   getAllThought(req, res) {
-    console.log("HELLLOOOO!!!!!!!")
-    res.json("test")
-    // Thought.find({})
-    //   .select("-__v")
-    //   .then((dbThoughtData) => res.json(dbThoughtData))
-    //   .catch((err) => {
-    //     console.log(err);
-    //     res.status(400).json(err);
-    //   });f
-  },
-
-  getThoughts : async(req, res) => {
-    console.log("HELLLOOOO!!!!!!!")
-    try{
-        const thought = await Thought.find()
-        res.json(thought)
-    }
-    catch(err){
+    Thought.find({})
+      .select("-__v")
+      .then((dbThoughtData) => res.json(dbThoughtData))
+      .catch((err) => {
         console.log(err);
-        res.status(400).json(err); 
-    }
+        res.status(400).json(err);
+      });
   },
 
   // get one Thought by id
@@ -48,19 +33,19 @@ const thoughtController = {
 
   // create Thought
   createThought(req, res) {
-   Thought.create(req.body)
-    .then(thought => 
+    Thought.create(req.body)
+      .then((thought) =>
         User.findOneAndUpdate(
-            { username: req.body.username },
-        { $push: { thoughts: thought._id } },
-        { new: true }
+          { username: req.body.username },
+          { $push: { thoughts: thought._id } },
+          { new: true }
         )
-    )
+      )
       .then((dbUserData) => {
         if (!dbUserData) {
-          return res
-            .status(404)
-            .json({ message: "Thought created but no user with this username" });
+          return res.status(404).json({
+            message: "Thought created but no user with this username",
+          });
         }
         res.json({ message: "Thought created!" });
       })
