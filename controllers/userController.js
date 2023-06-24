@@ -1,24 +1,11 @@
 const { User } = require("../models");
-const { ObjectId } = require('mongoose').Types;
+//const { ObjectId } = require("mongoose").Types;
 
 const userController = {
   //get all users
   getAllUsers(req, res) {
     User.find({})
-      // .populate({
-      //     path: 'thoughts',
-      //     //allows to remove __v from visuals
-      //     select: ('-__v')
-      // })
-      // .populate({
-      //     path: 'friends',
-      //     select: ('-__v')
-      // })
       .select("-__v")
-      // sort by descending order by the _id value
-      // .sort({
-      //     _id: -1
-      // })
       .then((dbUserData) => res.json(dbUserData))
       .catch((err) => {
         console.log(err);
@@ -94,21 +81,6 @@ const userController = {
         });
       })
       .then(() => {
-        // User.updateMany({
-        //         _id: {
-        //             $in: dbUserData.friends
-        //         }
-        //     }, {
-        //         $pull: {
-        //             friends: params.userId
-        //         }
-        //     })
-        //     .then(() => {
-        //         //deletes user's thought associated with id
-        //         Thought.deleteMany({
-        //                 username: dbUserData.username
-        //             })
-        //             .then(() => {
         res.json({
           message: "User deleted successfully",
         });
@@ -117,16 +89,6 @@ const userController = {
         console.log(err);
         res.status(400).json(err);
       });
-    //         })
-    //         .catch(err => {
-    //             console.log(err);
-    //             res.status(400).json(err);
-    //         })
-    // })
-    // .catch(err => {
-    //     console.log(err);
-    //     res.status(400).json(err);
-    // })
   },
 
   //add friends
@@ -177,27 +139,6 @@ const userController = {
             message: "No friend found with this id.",
           });
         }
-        //     return User.findOneAndUpdate(
-        //       {
-        //         friends: params.friendId,
-        //       },
-        //       {
-        //         $pull: {
-        //           friends: params.friendId,
-        //         },
-        //       },
-        //       {
-        //         new: true,
-        //       }
-        //     );
-        //   })
-        //   .then((dbUserData) => {
-        //     if (!dbUserData) {
-        //       res.status(404).json({
-        //         message: "No friend found with this id.",
-        //       });
-        //       return;
-        //     }
         res.json(dbUserData);
       })
       .catch((err) => res.json(err));
