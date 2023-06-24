@@ -3,7 +3,7 @@
 ## Description
 This application ia an API for a social network web page where users can share their thoughts, react to friends’ thoughts, and create a friend list.
 
-![Image](/Images/demo.png) 
+![Image](/Image/insomnia.png) 
 
 ## Table of Contents 
 
