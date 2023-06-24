@@ -12,7 +12,7 @@ This application ia an API for a social network web page where users can share t
 * [Contact Us](#contact-us)
 
 ## Installation
-Install npm i to install project dependencies inquirer and MySQL
+Install npm i to install project dependencies. Input npm run seed in the terminal to seed the data followed by npm start to connect to local host.
 
 ## Video walkthrough
 
