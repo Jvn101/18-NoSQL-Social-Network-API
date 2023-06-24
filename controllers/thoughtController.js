@@ -3,13 +3,27 @@ const { Thought, User } = require("../models");
 
 const thoughtController = {
   getAllThought(req, res) {
-    Thought.find({})
-      .select("-__v")
-      .then((dbThoughtData) => res.json(dbThoughtData))
-      .catch((err) => {
+    console.log("HELLLOOOO!!!!!!!")
+    res.json("test")
+    // Thought.find({})
+    //   .select("-__v")
+    //   .then((dbThoughtData) => res.json(dbThoughtData))
+    //   .catch((err) => {
+    //     console.log(err);
+    //     res.status(400).json(err);
+    //   });
+  },
+
+  getThoughts : async(req, res) => {
+    console.log("HELLLOOOO!!!!!!!")
+    try{
+        const thought = await Thought.find()
+        res.json(thought)
+    }
+    catch(err){
         console.log(err);
-        res.sendStatus(400);
-      });
+        res.status(400).json(err); 
+    }
   },
 
   // get one Thought by id
@@ -28,18 +42,25 @@ const thoughtController = {
       })
       .catch((err) => {
         console.log(err);
-        res.sendStatus(400);
+        res.status(400);
       });
   },
 
   // create Thought
-  createThought({ body }, res) {
-    Thought.create(body)
+  createThought(req, res) {
+   Thought.create(req.body)
+    .then(thought => 
+        User.findOneAndUpdate(
+            { username: req.body.username },
+        { $push: { thoughts: thought._id } },
+        { new: true }
+        )
+    )
       .then((dbUserData) => {
         if (!dbUserData) {
           return res
             .status(404)
-            .json({ message: "Thought created but no user with this ID" });
+            .json({ message: "Thought created but no user with this username" });
         }
         res.json({ message: "Thought created!" });
       })
