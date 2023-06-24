@@ -11,14 +11,9 @@ const UserSchema = new Schema(
     },
     email: {
       type: String,
-      required: [true, "User email address required"],
+      required: true,
       unique: true,
-      validate: {
-        validator: function (v) {
-          return /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/.test(v);
-        },
-        message: (props) => `${props.value} is not a valid email address!`,
-      },
+      match: [/.+@.+\..+/],
     },
     thoughts: [
       {
@@ -36,7 +31,6 @@ const UserSchema = new Schema(
   {
     toJSON: {
       virtuals: true,
-      getters: true,
     },
     id: false,
   }
