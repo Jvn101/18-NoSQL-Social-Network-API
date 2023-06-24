@@ -11,7 +11,7 @@ const thoughtController = {
     //   .catch((err) => {
     //     console.log(err);
     //     res.status(400).json(err);
-    //   });
+    //   });f
   },
 
   getThoughts : async(req, res) => {
