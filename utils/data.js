@@ -2,7 +2,6 @@ const userSeedData = [
   {
     username: "sally_smith",
     email: "sally@example.com",
-
   },
   {
     username: "claire_martin",
