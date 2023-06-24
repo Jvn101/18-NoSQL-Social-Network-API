@@ -16,7 +16,7 @@ Install npm i to install project dependencies. Input npm run seed in the termina
 
 ## Video walkthrough
 
-For this project we have created a video walkthrough demonstrating how this project can be used. Click [here](https://drive.google.com/file/d/1d4fL8ItIZy8871NP5jqNp95buGmeHP-K/view) to view.
+For this project we have created a video walkthrough demonstrating how this project can be used. Click [here]([https://drive.google.com/file/d/1d4fL8ItIZy8871NP5jqNp95buGmeHP-K/view](https://drive.google.com/file/d/1d4fL8ItIZy8871NP5jqNp95buGmeHP-K/view) to view.
 
 ***
 ### Contact us
