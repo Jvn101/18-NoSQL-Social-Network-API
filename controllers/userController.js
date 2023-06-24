@@ -1,4 +1,5 @@
 const { User } = require("../models");
+const { ObjectId } = require('mongoose').Types;
 
 const userController = {
   //get all users
@@ -69,7 +70,7 @@ const userController = {
       .then((dbUserData) => {
         if (!dbUserData) {
           return res.status(404).json({
-            message: "No user found with this id.",
+            message: "No user found with this ID.",
           });
         }
         res.json(dbUserData);
@@ -129,14 +130,14 @@ const userController = {
   },
 
   //add friends
-  addToFriendList({ params }, res) {
+  addToFriendList(req, res) {
     User.findOneAndUpdate(
       {
-        _id: params.userId,
+        _id: req.params.userId,
       },
       {
         $addToSet: {
-          friends: params.friendId,
+          friends: req.params.friendId,
         },
       },
       {
@@ -158,13 +159,13 @@ const userController = {
   },
 
   //delete friend
-  removefromFriendList({ params }, res) {
+  removefromFriendList(req, res) {
     User.findOneAndUpdate(
       {
-        _id: params.userId,
+        _id: req.params.userId,
       },
       {
-        $pull: { friends: params.friendId },
+        $pull: { friends: req.params.friendId },
       },
       {
         new: true,
